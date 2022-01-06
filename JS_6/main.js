@@ -384,17 +384,172 @@ logical operators:
 // 12. Objects ==================================================================================
 
 // fields
-let userName = 'Vadim';
-let age = 30;
-let isMarried = false;
+// let userName = 'Vadim';
+// let age = 30;
+// let isMarried = false;
 
-const person = {
-    userName: 'Vadim',
-    age: 30, 
-    isMarried: false
-}
+// const person = {
+//     userName: 'Vadim',
+//     age: 30,
+//     isMarried: false,
+//     profession: 'Disigner'
+// }
 
-console.log(person);
+// console.log(person);
+// console.log(person.userName);
+// console.log(person['age']);
+
+// let propertyName = 'profession'
+// console.log(person[propertyName]);
+
+// person.userLastName = 'Ivanov';
+// console.log(person);
+
+// delete person.age;
+// console.log(person);
+
+// Methods in object =================================================================
+
+// const person = {
+//     userName: 'Vadim',
+//     age: 30,
+//     isMarried: false,
+//     profession: 'Disigner',
+//     sayHi: function (name) {
+//         console.log(`Hi, ${name}!`);
+//     }
+// } 
+
+// person.sayHi();
+
+// person.sayHi2 = function (name) {
+//         console.log(`Hi, ${name}!`);
+// }
+// person.sayHi2('Vadim');
+// console.log(person); 
+
+// 14 Key word `this` =================================================================
+
+
+// const person = {
+//     userName: 'Vadim',
+//     age: 30,
+//     isMarried: false,
+//     profession: 'Disigner',
+//     sayHi: function (name) {
+//         console.log(this);
+//         console.log(`Hi, ${name}! My name is ${this.userName}.`);
+//     }
+// };
+
+// person.sayHi('Andrey');
+
+
+
+// 15 Cycle with `fot in` ====================================================================
+// может обходить неитерируемые объекты и возвращает ключи
+
+// const person = {
+//     userName: 'Vadim',
+//     age: 30,
+//     isMarried: false,
+//     profession: 'Disigner',
+//     sayHi: function (youName) {
+//         console.log(`Hi, ${youName}! My name is ${this.userName}.`);
+//     }
+// };
+
+// for(let key in    person)  {
+//     console.log(key);
+//     console.log(key, ':', person[key]);
+// }
+
+// 16 Nuance with const and changing of object and array  ====================================
+
+// const person = {
+//     userName: 'Vadim',
+//     age: 30,
+//     isMarried: false,
+//     profession: 'Disigner',
+// };
+
+// person = {
+//     // Uncaught TypeError: invalid assignment to const 'person'
+// }
+
+// 17 Classes. Constructor  =================================================================
+
+
+// const person = {
+//     userName: 'Vadim',
+//     age: 30,
+//     isMarried: false,
+//     profession: 'Disigner',
+//     sayHi: function (youName) {
+//         console.log(`Hi, ${youName}! My name is ${this.userName}.`);
+//     }
+// };
+
+// const person2 = {
+//     userName: 'Andrey',
+//     age: 46,
+//     isMarried: true,
+//     profession: 'Disigner',
+//     sayHi: function (youName) {
+//         console.log(`Hi, ${youName}! My name is ${this.userName}.`);
+//     }
+// }; 
+
+// class Person {
+//     constructor(userName, age, isMarried, profession) {
+//         this.userName = userName;
+//         this.age = age;
+//         this.isMarried = isMarried;
+//         this.profession = profession;
+//     }
+
+//     sayHi(youName) {
+//         console.log(`Hi, ${youName}! My name is ${this.userName}.`);
+//     }
+// }
+
+// const person1 = new Person('Andrey', 46, true, 'web-disigner');
+// const person2 = new Person('Vadim', 32, false, 'QA');
+
+// console.log(person1);
+// console.log(person2);
+// person1.sayHi('Tanya');
+// person2 .sayHi('Tanya');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
