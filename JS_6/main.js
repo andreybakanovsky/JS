@@ -276,7 +276,7 @@ logical operators:
 //     console.log("Hi, dear visitor!")
 // })();
 
-// // () - оборачиваем в выражение 
+// // () - 1) оборачиваем в выражение и 2 раз - запускаем на выполнение
 // (function (a, b) {
 //     console.log(a)
 //     console.log(b)
@@ -519,7 +519,7 @@ logical operators:
 // console.log(person1);
 // console.log(person2);
 // person1.sayHi('Tanya');
-// person2 .sayHi('Tanya');
+// person2.sayHi('Tanya');
 
 
 
