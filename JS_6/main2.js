@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=maPRR_jjyOE
+
 // Сhoice of DOM element ===========================================
 
 // выбор одного элемента по селектору
@@ -237,6 +239,277 @@
 // container.insertAdjacentHTML('beforeend',htmlExample);
 
 // ToDo список задач ===================================================================
+
+// Находим элементы с которыми мы будем работать
+// const todoForm = document.querySelector('#todo-form');
+// const todoInput = document.querySelector('#todo-input');
+// const todoList = document.querySelector('#todo-list');
+
+// todoForm.addEventListener('submit', formHandler)
+
+// создаем через тег li -------------------------------------------
+// function formHandler(event) {
+//     event.preventDefault();
+//     if (todoInput.value != '') {
+//         const taskText = `<li>${todoInput.value}</li>`;
+//         todoList.insertAdjacentHTML('beforeend', taskText);
+//         todoInput.value = '';
+//         todoInput.focus();
+//     }
+// }
+
+// создаем через Тег ----------------------------------------
+
+// const todoForm = document.querySelector('#todo-form');
+// const todoInput = document.querySelector('#todo-input');
+// const todoList = document.querySelector('#todo-list');
+
+// todoForm.addEventListener('submit', formHandler)
+
+// function formHandler(event) {
+//     event.preventDefault();
+//     if (todoInput.value != '') {
+//         const newTask = document.createElement('li');
+//         newTask.innerText = todoInput.value;
+//         //  плюс заключается в том что мы можем сразу определить событие для 
+//         //каждого элемента, например кнопку "удалить задачу":
+//         const deleteButton = document.createElement('button');
+//         deleteButton.setAttribute('role', 'button');
+//         deleteButton.innerText = 'Удалить';
+//         deleteButton.style['margin-left'] = '15px';
+//         newTask.append(deleteButton);
+
+//         deleteButton.addEventListener('click', function () {
+//             this.closest('li').remove();
+//         });
+//         // вариант со стрелочной функцией
+//         // // deleteButton.addEventListener('click', (event) => event.target.closest('li').remove());
+//         todoList.append(newTask);
+//         todoInput.value = '';
+//         todoInput.focus();
+//     }
+
+// }
+//-----------------------------------------------------------------------
+
+
+// setInterval ======================================================================================
+
+
+// const timerIntervalID =  setInterval(function(){
+//     console.log('Yes!')
+// }, 1000);
+
+// // clearInterval(timerIntervalID);
+
+// setTimeOut ======================================================================================
+
+// const timetID = setTimeout(function() {
+//     console.log('setTimeout.Yes!')
+// }, 2000 );
+
+//  clearInterval(timetID);
+
+// -----------------setInterval + setTimeOut -------------------------------------------------
+
+// const timerID = setInterval(function(){
+//     console.log('setInterval start!');
+// }, 1000); 
+
+// setTimeout(function(){
+//     clearInterval(timerID);
+// },10000)
+
+
+// Секундомер ================================================================================
+
+// const counterElement = document.querySelector('#counter');
+// const startButton = document.querySelector('#start');
+// const pauseButton = document.querySelector('#pause');
+// const resetButton = document.querySelector('#reset');
+
+// let counter = 0;
+// let timerIntervalID;
+
+// startButton.addEventListener('click', startTimer);// можно было startButton.onClick = ...
+// pauseButton.addEventListener('click', pauseTimer);
+// resetButton.onclick = function () {
+//     clearInterval(timerIntervalID);
+//     counterElement.innerText = 0;
+//     counter = 0;
+//     console.log('resetButton');
+// }
+// function startTimer() {
+//     timerIntervalID = setInterval(function () {
+//         counter++;
+//         counterElement.innerText = counter;
+//         console.log('startButton');
+
+//     }, 1000);
+// }
+// function pauseTimer() {
+//     clearInterval(timerIntervalID);
+//     console.log('pauseButton');
+// }
+
+// Асинхронность javascript ====================================================================
+
+// Callback. Callback hell
+
+// console.log('Start');
+
+// setTimeout(function () {
+//     console.log('Print in 2s')
+// }, 2000);
+
+// console.log('Finish');
+//-------------------------------------------------
+
+// setTimeout(function () {
+//     console.log('Step 1')
+// }, 2000);
+
+// setTimeout(function () {
+//     console.log('Step 2')
+// }, 1500);
+
+// setTimeout(function () {
+//     console.log('Step 3')
+// }, 1000);
+
+//-------------------------------------------------
+
+// setTimeout(function () {
+//     console.log('Step 1');
+//     setTimeout(function () {
+//         console.log('Step 2');
+//         setTimeout(function () {
+//             console.log('Step 3')
+//         }, 1000);
+//     }, 1500);
+// }, 2000);
+//------------------------------------------------
+
+//  1. Проверяем номера в отеле
+//  2. Проверяем билеты на самолет
+
+
+// function checkRooms() {
+//     console.log('Проверяем номера в отеле ....')
+//     setTimeout(function () {
+//         const availableRooms = false;
+//         if (availableRooms) {
+//             console.log('Номера есть!');
+//             console.log('Едем в отпуск! :)');
+//         } else {
+//             console.log('Номеров нет.');
+//             console.log('Отпуск отменяется :(');
+//         };
+//     }, 4000);
+
+// }
+// checkRooms(); 
+// ------------------------------------------------------
+
+// function checkRooms() {
+//     console.log('Проверяем номера в отеле ...')
+//     setTimeout(function () {
+//         const availableRooms = true;
+//         if (availableRooms) {
+//             let message = 'Номера есть!'
+//             submitVocation(message);
+//         } else {
+//             let message = 'Номеров нет.'
+//             cancelVocation(message);
+//         }
+//     }, 3000);
+// }
+// checkRooms();
+
+// function cancelVocation(message) {
+//     console.log('---- cancelVocation ----');
+//     console.log('Ответ на предыдущем шаге:', message);
+//     console.log('Отпуск отменяется :(');
+// }
+
+// function submitVocation(message) {
+//     console.log('---- submitVocation ----');
+//     console.log('Ответ на предыдущем шаге:', message);
+//     console.log('Едем в отпуск :)');
+// }
+
+// -------------------------------------------------------
+
+// function checkRooms(success, failed) {
+//     console.log('Проверяем номера в отеле ...')
+//     setTimeout(function () {
+//         const availableRooms = false;
+//         if (availableRooms) {
+//             let message = 'Номера есть!'
+//             success(message); 
+//         } else {
+//             let message = 'Номеров нет.'
+//             failed(message);
+//         }
+//     }, 3000);
+// }
+
+// function checkTickets(message, success, failed) {
+//     console.log('Проверяем авиабилеты ...')
+//     setTimeout(function () {
+//         console.log('---- checkTickets ----');
+//         console.log('Ответ на предыдущем шаге:', message);
+//         const availableTickets = true;
+
+//         if (availableTickets) {
+//             let message = 'Билеты есть';
+//             success(message);
+//         } else {
+//             let message = 'Билетов нет.'
+//             failed(message);
+//         }
+
+//     }, 1000);
+// }
+
+
+// checkRooms(// 5:22
+//     function (messageFromCheckRooms) {
+//         checkTickets(
+//             messageFromCheckRooms,
+//             function(messageFromCheckTickets){
+//                 submitVocation(messageFromCheckTickets) 
+//             }, 
+//             function(messageFromCheckTickets) {
+//                 cancelVocation(messageFromCheckTickets)
+//             })
+//     },
+//     function (messageFromCheckRooms) {
+//         cancelVocation(messageFromCheckRooms)
+//     }
+// ); // это можно упростить 5:32
+
+// function cancelVocation(message) {
+//     console.log('---- cancelVocation ----');
+//     console.log('Ответ на предыдущем шаге:', message);
+//     console.log('Отпуск отменяется :(');
+// }
+
+// function submitVocation(message) {
+//     console.log('---- submitVocation ----');
+//     console.log('Ответ на предыдущем шаге:', message);
+//     console.log('Едем в отпуск :)');
+// }
+
+// ------------------------------------------------------
+
+// Промисы, promise ===============================================================================
+
+
+
+
+
+
 
 
 

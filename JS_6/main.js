@@ -1,6 +1,8 @@
 
 console.log('Hello from JS!');
 
+// https://www.youtube.com/watch?v=maPRR_jjyOE
+
 // 2. Vars ======================================================================================
 
 // let userName = 'Andrey';
@@ -184,7 +186,7 @@ logical operators:
 // 6 Functions ===================================================================================
 
 // console.log("Hi, dear visitor!")
-// DRY
+// // DRY
 // function sayHi() {
 //     console.log("Hi, dear visitor!")
 // }
