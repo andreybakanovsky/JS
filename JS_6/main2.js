@@ -505,7 +505,381 @@
 
 // Промисы, promise ===============================================================================
 
+// const myPromise = new Promise(function(resolve, reject){
+//     console.log('Promise created');  
+//     setTimeout(function(){
+//         // -- request a server
+//         const response = false;
+//         if (response) {
+//             resolve();
+//         } else {
+//             reject();
+//         };
+//     },1000);
+// })
 
+// myPromise.then(function(){
+//     console.log('Then');
+// }).catch(function(){
+//     console.log('Catch')
+// });
+//----------------------------------------------------------
+
+// с передачей сообщения:
+// const myPromise = new Promise(function(resolve, reject){
+//     console.log('Promise created');  
+//     setTimeout(function(){
+//         // -- request a server
+//         const response = false;
+//         if (response) {
+//             let message = 'SUCCESS'
+//             resolve(message);
+//         } else {
+//             let message = 'FAILED'
+//             reject(message);
+//         };
+//     },1000);
+// })
+
+// myPromise.then(function(messageResolve){
+//     console.log(messageResolve);
+// }).catch(function(messageReject){
+//     console.log(messageReject)
+// });
+// -------------------------------------------------------
+
+// особенности работы с промисами
+// const myPromise = new Promise(function(resolve, reject){
+//     console.log('Promise created');  
+//     setTimeout(function(){
+//         // -- request a server
+//         const response = false;
+//         if (response) {
+//             let message = 'SUCCESS'
+//             resolve(message);
+//         } else {
+//             let message = 'FAILED'
+//             reject(message);
+//         };
+//     },1000);
+// }).then(function(messageResolve){ // мы таким образом можем продолжить работу с объектом
+//     console.log(messageResolve);
+// }).catch(function(messageReject){
+//     console.log(messageReject)
+// });
+// ------------------------------------------------------
+
+// const myPromise = new Promise(function(resolve, reject){
+//     console.log('Promise created');  
+//     setTimeout(function(){
+//         // -- request a server
+//         const response = true;
+//         if (response) {
+//             let message = 'SUCCESS';
+//             resolve(message);
+//         } else {
+//             let message = 'FAILED';
+//             reject(message);
+//         };
+//     },1000);
+// })
+
+// myPromise.then(function(data){
+//     console.log('Then 1');
+//     console.log(data);
+//     return 'Data from then 1';
+// }).then(function(data){                    // второй then
+//     console.log('Then 2');
+//     console.log(data);
+// }).catch(function(data){
+//     console.log('Catch');
+//     console.log(data)
+// });
+// -----------------------------------------------------
+
+// а что если в Then будет расположена задержка
+// const myPromise = new Promise(function (resolve, reject) {
+//     console.log('Promise created');
+//     setTimeout(function () {
+//         // -- request a server
+//         const response = true;
+//         if (response) {
+//             let message = 'SUCCESS';
+//             resolve(message);
+//         } else {
+//             let message = 'FAILED';
+//             reject(message);
+//         };
+//     }, 3000);
+// })
+
+// myPromise.then(function (data) { // 5:45 
+//     return new Promise(function (resolve, reject) { // нужно добавлять промисы
+//         console.log('Then 1');
+//         setTimeout(() => {
+//             console.log(data);
+//             const response = false;
+//             if (response) {
+//                 let message = 'Data from then 1 resolve';
+//                 resolve(message);
+//             } else {
+//                 let message = 'Data from then 1 reject';
+//                 reject(message);
+//             }
+//         }, 2000);
+//     });
+// }).then(function (data) {
+//     setTimeout(function () {
+//         console.log('Then 2');
+//         console.log(data);
+//     }, 1000);
+// }).catch(function (data) {
+//     console.log('Catch');
+//     console.log(data)
+// });
+// ----------------------------------------------------
+
+// a few exaples with promise =============================================================
+// made by myself:
+// const checkRooms = new Promise(function (resolve, reject) {
+//     setTimeout(function () {
+//         console.log('Проверка номеров в отеле ...');
+//         const availableRooms = true;
+//         if (availableRooms) {
+//             let message = 'Номера есть!'
+//             resolve(message);
+//         } else {
+//             let message = 'Номеров нет.'
+//             reject(message);
+//         };
+//     }, 2000);
+// });
+
+// checkRooms.then(function (data) {
+//     console.log('Then');
+//     console.log(data);
+//     return new Promise(function (resolve, reject) {
+//         //отправляем запрос
+//         setTimeout(function () {
+//             console.log('Проверка билетов ...');
+//             const availableTickets = false;
+//             if (availableTickets) {
+//                 let message = 'Билеты есть!';
+//                 resolve(message);
+//             } else {
+//                 let message = 'Билетов нет.';
+//                 reject(message);
+//             };
+//         }, 2000);
+//     })
+// }).then(function (data) {
+//     console.log('Then 2');
+//     console.log(data);
+//     console.log('Едем в отпуск :)');
+// }).catch(function (data) {
+//     console.log('Catch')
+//     console.log(data);
+//     console.log('Отпуск отменяется :(');
+// });
+
+// тоже, только с  другой компоновкой кода: создаем отдельные функции.
+// checkRooms()
+//     .then(checkTickets)
+//     .then(success)
+//     .catch(failed);
+
+// function checkRooms() {
+//     return new Promise(function (resolve, reject) {
+//         setTimeout(function () {
+//             console.log('Проверка номеров в отеле ...');
+//             const availableRooms = true;
+//             if (availableRooms) {
+//                 let message = 'Номера есть!'
+//                 resolve(message);
+//             } else {
+//                 let message = 'Номеров нет.'
+//                 reject(message);
+//             };
+//         }, 2000);
+//     });
+// };
+
+// function checkTickets(data) {
+//     return new Promise(function (resolve, reject) {
+//         console.log('Then');
+//         console.log(data);
+//         //отправляем запрос
+//         setTimeout(function () {
+//             console.log('Проверка билетов ...');
+//             const availableTickets = true;
+//             if (availableTickets) {
+//                 let message = 'Билеты есть!';
+//                 resolve(message);
+//             } else {
+//                 let message = 'Билетов нет.';
+//                 reject(message);
+//             };
+//         }, 2000);
+//     })
+// };
+
+// function success(data) {
+//     console.log('Then 2');
+//     console.log(data);
+//     console.log('Едем в отпуск :)');
+// };
+// function failed(data) {
+//     console.log('Catch')
+//     console.log(data);
+//     console.log('Отпуск отменяется :(');
+// };
+
+// Асинхронные функции. Async function. Потребление промиса
+
+// function promiseFunction() {
+//     return new Promise(function (resolve, reject) {
+//         setTimeout(() => {
+//             const result = true;
+//             if (result) {
+//                 resolve('DONE!');
+//             } else {
+//                 reject('FAIL!');
+//             };
+//         }, 500)
+//     })
+// }
+
+// // promiseFunction().then().catch(); // вместо такого выражения мы будем использовать асинхронную функцию
+// async function startPromise() {
+//     try {
+//         const result = await promiseFunction();
+//         console.log(result);
+//     } catch (err) {
+//         console.log(err);
+//     }
+// }
+// startPromise();
+
+// теперь опять на примере отеля:
+
+// function checkRooms() {
+//     return new Promise(function (resolve, reject) {
+//         setTimeout(function () {
+//             console.log('Проверка номеров в отеле ...');
+//             const availableRooms = false;
+//             if (availableRooms) {
+//                 let message = 'Номера есть!'
+//                 resolve(message);
+//             } else {
+//                 let message = 'Номеров нет.'
+//                 reject(message);
+//             };
+//         }, 1000);
+//     });
+// }
+
+// function checkTickets(data) {
+//     return new Promise(function (resolve, reject) {
+//         setTimeout(function () {
+//             console.log('Ответ на предыдущем шаге:', data);
+//             console.log('Проверка билетов на самолет ...')
+//             // --- code with a request ---
+//             const availableTickets = true;
+//             if (availableTickets) {
+//                 let message = 'Билеты есть!';
+//                 resolve(message);
+//             } else {
+//                 let message = 'Билетов нет.';
+//                 reject(message);
+//             };
+//         }, 1000);
+//     })
+// }
+
+
+// function submitVocation(data) {
+//     console.log(' ---- submitVocation ----');
+//     console.log('Ответ на предыдущем шаге:', data);
+//     console.log('Едем в отпуск! :)');
+// }
+
+
+// function cancelVocation(data) {
+//     console.log(' ---- cancelVocation ----');
+//     console.log('Ответ на предыдущем шаге:', data);
+//     console.log('Отпуск отменяется :(');
+// }
+
+// async function checkVocation() {
+//     try {
+//         const roomsResult = await checkRooms();
+//         //  console.log(roomsResult);
+//         const ticketResult = await checkTickets(roomsResult);
+//         submitVocation(ticketResult);
+//     } catch (err) {
+//         // console.log(err)
+//         cancelVocation(err); // !!
+//     }
+// }
+
+// checkVocation();
+
+// Пример fetch  с промисами, получение данных по API ==========================================
+// Получение актуальных курсов валют
+
+// 1. Получаем данные с сервера
+
+// const response =  fetch('https://www.cbr-xml-daily.ru/daily_json.js')
+// console.log(response);// fetch возвращает промис
+
+// fetch('https://www.cbr-xml-daily.ru/daily_json.js')
+//     .then(function (data) {
+//         return data.json()
+//     }).then(function (data) {
+//         console.log(data)
+//     })
+
+// -------------------------------------------------------------------------------------
+// с помощью асинхронной функции
+// async function getCurrencies() {
+//     const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+//     const response = await fetch(url);
+//     const data = await response.json();
+
+//     const usdRate = data.Valute.USD.Value.toFixed(2);
+//     const eurRate = data.Valute.EUR.Value.toFixed(2);
+
+//     // ищем элементы на странице
+//     const usdElement = document.querySelector('#usd');
+//     usdElement.innerText = usdRate;
+//     const eurElement = document.querySelector('#eur');
+//     eurElement.innerText = eurRate;
+// }
+
+// getCurrencies();
+
+// async function getCurrencies() {
+//     // 1. получение данных с сервера
+//     const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+//     const response = await fetch(url);
+//     const data = await response.json();
+//     // return data; // все равно вернет промис 
+
+//     // 2. отображение данных на странице
+//     renderRates(data);
+// }
+
+// getCurrencies();
+
+// function renderRates(data) {
+//     const usdRate = data.Valute.USD.Value.toFixed(2);
+//     const eurRate = data.Valute.EUR.Value.toFixed(2);
+//     // ищем элементы на странице
+//     const usdElement = document.querySelector('#usd');
+//     usdElement.innerText = usdRate;
+//     const eurElement = document.querySelector('#eur');
+//     eurElement.innerText = eurRate;
+// }
 
 
 
